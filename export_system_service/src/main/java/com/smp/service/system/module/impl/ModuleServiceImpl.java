@@ -28,7 +28,7 @@ public class ModuleServiceImpl implements IModuleService {
     }
 
     @Override
-    public void savemodule(Module module) {
+    public void saveModule(Module module) {
         String uuid= UUID.randomUUID().toString();
         module.setModuleId(uuid);
         iModuleDao.save(module);
@@ -41,12 +41,12 @@ public class ModuleServiceImpl implements IModuleService {
     }
 
     @Override
-    public void updatemodule(Module module) {
+    public void updateModule(Module module) {
         iModuleDao.update(module);
     }
 
     @Override
-    public void deletemodule(String moduleId) {
-        iModuleDao.delete(String moduleId);
+    public void deleteModule(String moduleId) {
+
     }
 }

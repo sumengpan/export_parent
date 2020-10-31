@@ -27,32 +27,34 @@ public class TestModuleService {
         PageInfo<Module> pi=iModuleService.findByPage(1,3);
         l.info("pi="+pi);
     }
+
     @Test
     public void test02(){
         //将一个表单数据保存在javaBean中，再存到数据库
        Module module=new Module();
        module.setName("模块1");
-       iModuleService.savemodule(module);
+
+       iModuleService.saveModule(module);
        //l.info("pi="+pi);
     }
     @Test
     public void test03(){
     //更新业务，先根据id查找对应记录，编辑值，在保存到数据库
-        String moduleId ="";
+        String moduleId ="ad3be6e7-551f-45b6-b816-b2b751e204ed";
         Module module=iModuleService.findModuleById(moduleId);
         l.info("module="+module);
         //修改
         module.setName("模块2");
 
         //保存
-        iModuleService.updatemodule(module);
+        iModuleService.updateModule(module);
     }
     @Test
     public void test04(){
         //删除业务，根据指定id
         String moduleId="9c5eb9b0-54a4-48bb-aab4-0d1d46cdfbbd";
         //删除
-        iModuleService.deletemodule(moduleId);
+        iModuleService.deleteModule(moduleId);
     }
 
 

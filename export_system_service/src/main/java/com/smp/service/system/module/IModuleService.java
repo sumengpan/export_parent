@@ -4,14 +4,14 @@ import com.github.pagehelper.PageInfo;
 import com.smp.domain.system.module.Module;
 
 public interface IModuleService {
-
+    //查看
     PageInfo<Module> findByPage(int curr, int pageSize);
-
-    void savemodule(Module module);
-
+    //保存
+    void saveModule(Module module);
+    //查找更新
     Module findModuleById(String moduleId);
-
-    void updatemodule(Module module);
-
-    void deletemodule(String moduleId);
+    //更新
+    void updateModule(Module module);
+    //删除
+    void deleteModule(String moduleId);
 }
