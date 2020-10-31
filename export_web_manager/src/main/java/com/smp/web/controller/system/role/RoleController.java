@@ -25,7 +25,7 @@ public class RoleController extends BaseController {
     IRoleService iRoleService;
 
     @RequestMapping(path = "/toList",method = {RequestMethod.GET,RequestMethod.POST})
-    public  String toList(@RequestParam(defaultValue = "1")int curr,@RequestParam(defaultValue = "3")int pageSize){
+    public  String toList(@RequestParam(defaultValue = "1")int curr,@RequestParam(defaultValue = "10")int pageSize){
         //调查询分页列表的方法
         PageInfo<Role> pi=iRoleService.findByPage(curr,pageSize,getLoginCompanyId());
         //将pi添加到页面
