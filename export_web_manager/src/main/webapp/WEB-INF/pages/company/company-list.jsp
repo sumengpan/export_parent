@@ -142,7 +142,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach items="${list}" var="item">
+                        <c:forEach items="${pi.list}" var="item">
                             <tr>
                                 <td><input name="ids" value="${item.id}" type="checkbox"></td>
                                 <td>${item.name}</td>
@@ -203,8 +203,6 @@
 
             </div>
 
-
-        </div>
     </section>
 </div>
 </body>
