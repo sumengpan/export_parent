@@ -13,10 +13,9 @@
     <section class="content-header">
         <h1>
             系统管理
-            <%--<small>部门管理</small>--%>
+            <small>部门管理</small>
         </h1>
-        <%--${dept}
-        ${list}--%>
+
         <ol class="breadcrumb">
             <li><a href="all-admin-index.html"><i class="fa fa-dashboard"></i> 首页</a></li>
         </ol>
@@ -40,13 +39,14 @@
                                 </div>
                                 <div class="col-md-2 title">上级部门</div>
                                 <div class="col-md-10 data line-height36">
-                                    <select class="form-control" name="parent.deptId">
+                                    <select class="form-control" name="parentId">
                                         <option value="">董事会</option>
                                         <c:forEach items="${list}" var="item">
-                                            <%--dept 表示正在编辑的部门数据，不能选择自己作为上级部门--%>
-                                            <c:if test="${dept.deptId!=item.deptId}">
+                                            <%-- dept表示正在编辑的部门数据，不能选自己作为上级部门--%>
+                                            <c:if test="${dept.deptId != item.deptId}">
                                                 <option ${dept.parent.deptId == item.deptId ?'selected':''}  value="${item.deptId}">${item.deptName}</option>
                                             </c:if>
+
                                         </c:forEach>
                                     </select>
                                 </div>

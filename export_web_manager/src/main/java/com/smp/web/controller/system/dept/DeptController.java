@@ -27,7 +27,7 @@ public class DeptController extends BaseController{
 
     @RequestMapping(path = "/toList",method = {RequestMethod.GET,RequestMethod.POST})
     public  String toList(Model model,@RequestParam(defaultValue = "1") Integer curr,
-                          @RequestParam(defaultValue = "3")  Integer pageSize){
+                          @RequestParam(defaultValue = "10")  Integer pageSize){
         l.info("toList curr"+curr);//当前页数
         l.info("toList pageSize"+pageSize);//每页记录数
         l.info("toList companyId"+super.getLoginCompanyId());//指定公司id
@@ -67,16 +67,17 @@ public class DeptController extends BaseController{
     }
     //修改编辑
     //${path}/system/dept/toUpdate.do?deptId=${dept.deptId}
-    @RequestMapping(path = "/toUpdate",method = {RequestMethod.GET,RequestMethod.POST})
-    public String toUpdate(Model model,String deptId){
+    @RequestMapping(path="/toUpdate",method ={ RequestMethod.GET, RequestMethod.POST})
+    public String toUpdate(Model model, String deptId){
 
-        String companyId=super.getLoginCompanyId();
+        String companyId = super.getLoginCompanyId();
         l.info("toUpdate deptId="+deptId);
+
         //查询部门
-        Dept dept=iDeptService.findById(deptId);
+        Dept dept = iDeptService.findById(deptId);
         l.info("toUpdate dept="+dept);
 
-        List<Dept> list=iDeptService.findAll(companyId);
+        List<Dept> list = iDeptService.findAll(companyId);
 
         model.addAttribute("dept",dept);
         model.addAttribute("list",list);
@@ -92,8 +93,6 @@ public class DeptController extends BaseController{
         l.info("update parentId="+parentId);
 
         //当前写死companyId与companyName以后再修改
-        /*dept.setCompanyName("吉首大学");
-        dept.setCompanyId("1");*/
         dept.setCompanyName(super.getLoginCompanyName());
         dept.setCompanyId(super.getLoginCompanyId());
 
@@ -104,18 +103,18 @@ public class DeptController extends BaseController{
         l.info("update dept="+dept);
         //2 保存到数据库
         iDeptService.updateDept(dept);
-
-        return "redirect:/system/dept/toList.do";//修改完成之后跳到列表页面
+        //修改完成之后跳到列表页面
+        return "redirect:/system/dept/toList.do";
     }
 
     // location.href="${path}/system/dept/delete.do?depId="+deptId;
     @RequestMapping(path="/delete",method ={ RequestMethod.GET})
-    public String delete(String depId){
-        l.info("delete depId="+depId);
+    public String delete(String deptId){
+        l.info("delete deptId="+deptId);
 
-        iDeptService.deleteDeptById(depId);
-
-        return "redirect:/system/dept/toList.do";//修改完成之后跳到列表页面
+        iDeptService.deleteDeptById(deptId);
+        //修改完成之后跳到列表页面
+        return "redirect:/system/dept/toList.do";
     }
 
     /*

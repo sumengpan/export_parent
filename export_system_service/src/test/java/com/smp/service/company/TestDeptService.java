@@ -24,6 +24,8 @@ public class TestDeptService {
     //4、在实现类上加@service
     @Autowired
     IDeptService iDeptService;
+
+    //列表显示
     @Test
     public void test01(){
         //部门分页显示
@@ -35,6 +37,7 @@ public class TestDeptService {
         //3、打印
         l.info("test01 pi="+pi);
     }
+    //查询company_id为1的部门
     @Test
     public void test02(){
         //给页面的下拉菜单按公司查找所有的部门
@@ -44,12 +47,13 @@ public class TestDeptService {
         //打印
         l.info("test02 list="+list);
     }
+    //添加一个部门
     @Test
     public void test03(){
         //模拟表单
         Dept dept=new Dept();
         dept.setCompanyId("1");
-        dept.setDeptName("最牛java部门");
+        dept.setDeptName("java部门");
         dept.setState(1);
 
         Dept parent =new Dept();
@@ -58,40 +62,36 @@ public class TestDeptService {
         dept.setParent(parent);
         iDeptService.saveDept(dept);
     }
+    //查询指定dept_id的部门
     @Test
     public void test04(){
         String deptId="100101";
         Dept dept=iDeptService.findById(deptId);
         l.info("test04 dept="+dept);
     }
-
+    //修改
     @Test
     public void test05(){
-
         String deptId="8a7e82be61400c000161400c05810000";
         Dept dept = iDeptService.findById(deptId);
         //1 模拟页面的修改
-        dept.setDeptName("ym");
-
+        dept.setDeptName("BATJM299");
         dept.setCompanyName("吉首大学");
-        dept.setCompanyId("1");
-
+        dept.setCompanyId("2");
         Dept parent = new Dept();//下拉菜单
         parent.setDeptId("100");
         dept.setParent(parent);
-
         dept.setState(0);//停用
-
         //2 保存到数据库
         iDeptService.updateDept(dept);
-
         l.info("test05  dept="+dept);
     }
+    //删除
     @Test
     public void test06(){
         //给定id
-        //String deptId="33";
-        String deptId="100";//有给其他部门作上级
+        //String deptId=" ";
+        String deptId="c2a4fadf-4efa-4e17-a4a4-3f93d84825d9";//有给其他部门作上级
         //根据id删除
         boolean result=iDeptService.deleteDeptById(deptId);
         l.info("test06 result="+result);
