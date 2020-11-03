@@ -91,7 +91,7 @@ public class TestDeptService {
     public void test06(){
         //给定id
         //String deptId=" ";
-        String deptId="c2a4fadf-4efa-4e17-a4a4-3f93d84825d9";//有给其他部门作上级
+        String deptId="4c028897-68cc-4be8-a220-ef66e389bf60";//有给其他部门作上级
         //根据id删除
         boolean result=iDeptService.deleteDeptById(deptId);
         l.info("test06 result="+result);

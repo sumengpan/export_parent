@@ -19,7 +19,7 @@
         var id = getCheckId()
         if(id) {
             if(confirm("你确认要删除此条记录吗？")) {
-                location.href="${path}/system/dept/delete.do?id="+id;
+                location.href="${path}/system/dept/delete.do?deptId="+id;
             }
         }else{
             alert("请勾选待处理的记录，且每次只能勾选一个")
