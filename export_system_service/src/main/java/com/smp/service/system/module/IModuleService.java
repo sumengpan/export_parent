@@ -3,6 +3,8 @@ package com.smp.service.system.module;
 import com.github.pagehelper.PageInfo;
 import com.smp.domain.system.module.Module;
 
+import java.util.List;
+
 public interface IModuleService {
     //查看
     PageInfo<Module> findByPage(int curr, int pageSize);
@@ -13,5 +15,7 @@ public interface IModuleService {
     //更新
     void updateModule(Module module);
     //删除
-    void deleteModule(String moduleId);
+    boolean deleteModule(String moduleId);
+
+    List<Module> findAllModules();
 }

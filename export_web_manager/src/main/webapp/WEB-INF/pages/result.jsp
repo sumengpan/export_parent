@@ -12,5 +12,6 @@
 </head>
 <body>
 我是结果页面
+${jack}
 </body>
 </html>

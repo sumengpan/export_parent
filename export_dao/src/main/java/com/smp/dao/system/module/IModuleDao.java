@@ -11,4 +11,10 @@ public interface IModuleDao {
     void save(Module module);
 
     void update(Module module);
+
+    Module findById(String moduleId);
+
+    int findParentIdCount(String moduleId);
+
+    void deleteById(String moduleId);
 }

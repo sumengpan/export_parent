@@ -51,7 +51,12 @@
             values
             (
             #{ moduleId     },
-            #{ parentId     },
+            <if test="parentId == null or parentId=='' ">
+                NULL,
+            </if>
+            <if test="parentId != null and parentId!='' ">
+                #{parentId  },
+            </if>
             #{ parentName   },
             #{ name         },
             #{ layerNum     },
@@ -70,7 +75,39 @@
     </insert>
 
     <select id="findById" parameterType="string" resultMap="moduleMap">
-
+        select * from ss_module where module_id=#{moduleId}
     </select>
 
+    <update id="update" parameterType="module">
+
+            update ss_module set
+            parent_id   = #{parentId    },
+            parent_name = #{parentName  },
+            name        = #{name        },
+            layer_num   = #{layerNum    },
+            is_leaf     = #{isLeaf      },
+            ico         = #{ico         },
+            cpermission = #{cpermission },
+            curl        = #{curl        },
+            ctype       = #{ctype       },
+            state       = #{state       },
+            belong      = #{belong      },
+            cwhich      = #{cwhich      },
+            quote_num   = #{quoteNum    },
+            remark      = #{remark      },
+            order_no    = #{orderNo     }
+
+            where module_id   =  #{moduleId}
+    </update>
+
+
+
+    <delete id="deleteById" parameterType="string">
+        delete from ss_module where module_id=#{moduleId}
+    </delete>
+
+
+    <select id="findParentIdCount" parameterType="string" resultType="int">
+        select count(*) from ss_module where parent_id=#{moduleId}
+    </select>
 </mapper>

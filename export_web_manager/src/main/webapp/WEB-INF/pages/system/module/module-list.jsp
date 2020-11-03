@@ -19,7 +19,15 @@
         var id = getCheckId()
         if(id) {
             if(confirm("你确认要删除此条记录吗？")) {
-                location.href="/system/module/delete.do?id="+id;
+                //location.href="/system/module/delete.do?id="+id;
+                //使用ajax请求
+                var url= '${path}/system/module/delete.do?moduleId='+id;
+                var fn = function(result){ //{code:200,msg:'删除成功',data:null}
+                    //弹出提示
+                    alert(result.msg)
+                    window.location.reload() //重新加载
+                }
+                $.get(url,fn,'json')
             }
         }else{
             alert("请勾选待处理的记录，且每次只能勾选一个")
@@ -57,7 +65,7 @@
                 <div class="pull-left">
                     <div class="form-group form-inline">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-default" title="新建" onclick='location.href="/system/module/toAdd.do"'><i class="fa fa-file-o"></i> 新建</button>
+                            <button type="button" class="btn btn-default" title="新建" onclick='location.href="${path}/system/module/toAdd.do"'><i class="fa fa-file-o"></i> 新建</button>
                             <button type="button" class="btn btn-default" title="删除" onclick='deleteById()'><i class="fa fa-trash-o"></i> 删除</button>
                             <button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i class="fa fa-refresh"></i> 刷新</button>
                         </div>
@@ -90,27 +98,28 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach items="${page.rows}" var="o"  varStatus="st">
+                    <c:forEach items="${pi.list}" var="o"  varStatus="st">
                         <tr>
-                            <td><input type="checkbox" name="id" value="${o.id }"/></td>
+                            <td><input type="checkbox" name="moduleId" value="${o.moduleId }"/></td>
                             <td>${status.index+1}</td>
-                            <td><a href="moduleAction_toview?id=${o.id}">${o.name}</a></td>
+                            <td><a href="${path}/system/module/toUpdate.do?moduleId=${o.moduleId}">${o.name}</a></td>
                             <td>${o.parentName}</td>
                             <td>${o.cpermission}</td>
                             <td>${o.curl}</td>
                             <td>${o.ctype==0?'主菜单':o.ctype==1?'二级菜单':'按钮'}</td>
                             <td>${o.belong}</td>
                             <td>${o.state==0?'停用':'启用'}</td>
-                            <th class="text-center"><button type="button" class="btn bg-olive btn-xs" onclick='location.href="/system/module/toUpdate.do?id=${o.id}"'>编辑</button></th>
+                            <th class="text-center"><button type="button" class="btn bg-olive btn-xs" onclick='location.href="${path}/system/module/toUpdate.do?moduleId=${o.moduleId}"'>编辑</button></th>
                         </tr>
                     </c:forEach>
                     </tbody>
                 </table>
             </div>
         </div>
+
         <div class="box-footer">
             <jsp:include page="../../common/page.jsp">
-                <jsp:param value="${ctx}/system/module/list.do" name="pageUrl"/>
+                <jsp:param value="${path}/system/module/toList.do" name="pageUrl"/>
             </jsp:include>
         </div>
     </div>

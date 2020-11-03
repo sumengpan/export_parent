@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.List;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath*:spring/applicationContext-*.xml")  //3:创建 spring/applicationContext-tx.xml
 public class TestModuleService {
@@ -54,8 +56,13 @@ public class TestModuleService {
         //删除业务，根据指定id
         String moduleId="9c5eb9b0-54a4-48bb-aab4-0d1d46cdfbbd";
         //删除
-        iModuleService.deleteModule(moduleId);
+        boolean flag=iModuleService.deleteModule(moduleId);
+        l.info(flag+"");
     }
-
+    @Test
+    public void test05(){
+        List<Module> list=iModuleService.findAllModules();
+        l.info("pi="+list);
+    }
 
 }
