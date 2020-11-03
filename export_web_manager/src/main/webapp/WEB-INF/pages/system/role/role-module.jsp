@@ -5,7 +5,7 @@
 <html>
 
 <head>
-    <base href="${path}/">
+    <base href="${ctx}/">
     <!-- 页面meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -58,8 +58,8 @@
                     </div>
                     <!--工具栏/-->
                     <!-- 树菜单 -->
-                    <form name="icform" method="post" action="${path}/system/role/toRoleModule.do">
-                        <input type="hidden" name="roleId" value="${role.roleId}"/>
+                    <form name="icform" method="post" action="/system/role/updateRoleModule.do">
+                        <input type="hidden" name="roleid" value="${role.id}"/>
                         <input type="hidden" id="moduleIds" name="moduleIds" value=""/>
                         <div class="content_wrap">
                             <div class="zTreeDemoBackground left" style="overflow: visible">
