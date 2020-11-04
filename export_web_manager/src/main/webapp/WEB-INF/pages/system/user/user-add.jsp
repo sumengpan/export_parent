@@ -38,9 +38,8 @@
         <!--订单信息-->
         <div class="panel panel-default">
             <div class="panel-heading">用户信息</div>
-            <form id="editForm" action="/system/user/edit.do" method="post">
-                <input type="hidden" id="id" name="id" value="${user.id}">
-                <input type="hidden" id="deptName" name="deptName" value="${user.deptName}">
+            <form id="editForm" action="${path}/system/user/add.do" method="post">
+
                 <div class="row data-type" style="margin: 0px">
                     <div class="col-md-2 title">用户名称</div>
                     <div class="col-md-4 data">
@@ -48,11 +47,23 @@
                     </div>
 
                     <div class="col-md-2 title">所在部门</div>
+
                     <div class="col-md-4 data">
-                        <select class="form-control" onchange="document.getElementById('deptName').value=this.options[this.selectedIndex].text" name="deptId">
-                            <option value="">请选择</option>
-                            <c:forEach items="${deptList}" var="item">
-                                <option ${user.deptId == item.id ?'selected':''} value="${item.id}">${item.deptName}</option>
+                        <input type="hidden" id="deptName" name="deptName" value="${depts[0].deptName}" >
+                        <script type="text/javascript">
+                            function selectDepartment() {
+                                //获取选中值的中文
+                                var select= $('#select option:selected')
+                                //将中文赋值给隐藏的输入框，最后提交到后台
+                                //alert(select.val())
+                                //alert(select.html())
+                                $('#deptName').val(select.html())
+                            }
+
+                        </script>
+                        <select id="select" class="form-control" onchange="selectDepartment()" name="deptId">
+                            <c:forEach items="${depts}" var="item">
+                                <option value="${item.deptId}">${item.deptName}</option>
                             </c:forEach>
                         </select>
                     </div>
@@ -69,7 +80,7 @@
 
                     <div class="col-md-2 title">薪水</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="薪水" name="salary" value="${user.salary}">
+                        <input type="text" class="form-control" placeholder="薪水" name="salary" value="0.0">
                     </div>
 
                     <div class="col-md-2 title">状态</div>
@@ -130,7 +141,7 @@
                     </div>
                     <div class="col-md-2 title">排序号</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="排序号" name="orderNo" value="${user.orderNo}">
+                        <input type="text" class="form-control" placeholder="排序号" name="orderNo" value="0">
                     </div>
                     <div class="col-md-2 title">说明</div>
                     <div class="col-md-4 data">

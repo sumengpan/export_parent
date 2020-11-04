@@ -19,7 +19,14 @@
         var id = getCheckId()
         if(id) {
             if(confirm("你确认要删除此条记录吗？")) {
-                location.href="/system/user/delete.do?id="+id;
+                //location.href="/system/user/delete.do?id="+id;
+                var url='${path}/system/user/delete.do?userId='+id;
+                var fn=function (result) {
+                    //code:200,删除成功
+                    alert(result.msg)
+                    window.location.reload()
+                }
+                $.get(url,fn,'json')
             }
         }else{
             alert("请勾选待处理的记录，且每次只能勾选一个")
@@ -56,7 +63,7 @@
                 <div class="pull-left">
                     <div class="form-group form-inline">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-default" title="新建" onclick='location.href="/system/user/toAdd.do"'><i class="fa fa-file-o"></i> 新建</button>
+                            <button type="button" class="btn btn-default" title="新建" onclick='location.href="${path}/system/user/toAdd.do"'><i class="fa fa-file-o"></i> 新建</button>
                             <button type="button" class="btn btn-default" title="删除" onclick='deleteById()'><i class="fa fa-trash-o"></i> 删除</button>
                             <button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i class="fa fa-refresh"></i> 刷新</button>
                             <button type="button" class="btn btn-default" title="角色" onclick="roleList()"><i class="fa fa-user-circle-o"></i> 角色</button>
@@ -87,11 +94,11 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach items="${page.rows}" var="item">
+                    <c:forEach items="${pi.list}" var="item">
                     <tr>
-                        <td><input name="ids" value="${item.id}" type="checkbox"></td>
+                        <td><input name="ids" value="${item.userId}" type="checkbox"></td>
                         <td>${status.index+1}</td>
-                        <td><a href="/system/user/toUpdate.do?id=${o.id}">${item.userName}</a></td>
+                        <td><a href="${path}/system/user/toUpdate.do?userId=${item.userId}">${item.userName}</a></td>
                         <td>${item.deptName }</td>
                         <td>${item.email }</td>
                         <td>${item.telephone }</td>
@@ -99,7 +106,7 @@
                         <td>${item.station }</td>
                         <td>${item.state  ==0?'停用':'启用'}</td>
                         <th class="text-center">
-                            <button type="button" class="btn bg-olive btn-xs" onclick='location.href="/system/user/toUpdate.do?id=${item.id}"'>编辑</button>
+                            <button type="button" class="btn bg-olive btn-xs" onclick='location.href="${path}/system/user/toUpdate.do?userId=${item.userId}"'>编辑</button>
                         </th>
                     </tr>
                     </c:forEach>
@@ -109,7 +116,7 @@
         </div>
         <div class="box-footer">
             <jsp:include page="../../common/page.jsp">
-                <jsp:param value="${ctx}/system/user/list.do" name="pageUrl"/>
+                <jsp:param value="${path}/system/user/toList.do" name="pageUrl"/>
             </jsp:include>
         </div>
     </div>

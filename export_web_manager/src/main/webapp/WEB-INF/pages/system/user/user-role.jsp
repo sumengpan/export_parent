@@ -47,18 +47,18 @@
                     <input type="hidden" name="userid" value="${user.id}"/>
                     <input type="hidden" name="oldRoleIds" value="${userRoleStr}"/>
                     <div class="textbox" id="centerTextbox">
-                            <div style="text-align:left">
-                                <c:set var="oldRoleIds" value=""/>
-                                <c:forEach items="${roleList}" var="role" varStatus="vs">
+                        <div style="text-align:left">
+                            <c:set var="oldRoleIds" value=""/>
+                            <c:forEach items="${roleList}" var="role" varStatus="vs">
                                      <span style="padding:3px;margin-right:30px;width: 160px;display: inline-block">
                                          <input type="checkbox" name="roleIds" value="${role.id}"
                                                 <c:if test="${fn:contains(userRoleStr,role.id)}">checked</c:if>
                                          />
                                          ${role.name}
                                      </span>
-                                </c:forEach>
-                            </div>
+                            </c:forEach>
                         </div>
+                    </div>
                 </form>
             </div>
         </div>

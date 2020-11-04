@@ -176,7 +176,7 @@
                      </a>
                  </li>
                  <li id="sys-user">
-                     <a href="/system/user/list.do" onclick="setSidebarActive(this)"  target="iframe">
+                     <a href="${path}/system/user/toList.do" onclick="setSidebarActive(this)"  target="iframe">
                          <i class="fa fa-circle-o"></i>用户管理
                      </a>
                  </li>
@@ -186,7 +186,7 @@
                      </a>
                  </li>
                  <li id="sys-log">
-                     <a href="/system/log/list.do" onclick="setSidebarActive(this)"  target="iframe">
+                     <a href="${path}/system/log/toList.do" onclick="setSidebarActive(this)"  target="iframe">
                          <i class="fa fa-circle-o"></i>日志管理
                      </a>
                  </li>
