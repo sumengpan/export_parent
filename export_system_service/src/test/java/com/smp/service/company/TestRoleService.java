@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.List;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath*:spring/applicationContext-*.xml")  //3:创建 spring/applicationContext-tx.xml
 public class TestRoleService {
@@ -57,5 +59,22 @@ public class TestRoleService {
         //删除
         iRoleService.deleteRole(roleId);
     }
-
+    @Test
+    public void test05(){
+        //老王的角色列表
+        String userId="002108e2-9a10-4510-9683-8d8fd1d374ef";
+        String companyId="1";
+        List<Role> all=iRoleService.findAll(companyId);
+        //查找老王自己的
+        List<Role> wanglist=iRoleService.findRolesByUserId(userId);
+        l.info("test05 all="+all);
+        l.info("test05 wanglist="+wanglist);
+    }
+    @Test
+    public void test06(){
+        //老王的角色列表
+        String userId="";
+        String[] roleIds={""};
+        iRoleService.updateUserRole(userId,roleIds);
+    }
 }

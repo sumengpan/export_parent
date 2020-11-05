@@ -15,4 +15,11 @@ public interface IRoleDao {
     void update(Role role);
 
     void deleteById(String roleId);
+    //通多id查找用户
+    List<Role> findByUserId(String userId);
+    //通过用户id删除用户角色
+    void deleteUserRoleByUserId(String userId);
+    //保存用户角色
+    void saveUserRole(String userId,String roleId);
+
 }
