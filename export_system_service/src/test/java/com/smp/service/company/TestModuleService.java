@@ -2,6 +2,7 @@ package com.smp.service.company;
 
 import com.github.pagehelper.PageInfo;
 import com.smp.domain.system.module.Module;
+import com.smp.domain.system.user.User;
 import com.smp.service.system.module.IModuleService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -65,4 +66,27 @@ public class TestModuleService {
         l.info("pi="+list);
     }
 
+    //角色权限时，正确的是3 个
+    @Test
+    public void test06(){
+        List<Module> mylist=iModuleService.findModuleByRoleId("2");
+        l.info("mylist="+mylist);
+    }
+    //角色B的权限，更新权限
+    @Test
+    public void test07(){
+        //修改一个角色的权限，不仅仅是添加，也可能是减少
+        String roleId ="0ae3657e-2042-4b9b-b1e9-8d2ef81f63ee";
+        String moduleIds="201,202,203";
+        iModuleService.updateRoleModule(roleId,moduleIds);
+    }
+    @Test
+    public void test08(){
+        User user=new User();
+        user.setUserId("0f1f71fe-fe7c-4a44-a952-4f08bf5aa990");
+        user.setDegree(1);//企业管理员
+        user.setDegree(4);//普通用户
+        List<Module> menus=iModuleService.findModuleByUser(user);
+        l.info("test08 menus="+menus);
+    }
 }
