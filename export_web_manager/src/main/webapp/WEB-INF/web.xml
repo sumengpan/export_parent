@@ -4,7 +4,8 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          version="2.5">
   <welcome-file-list>
-    <welcome-file>home/toMain.do</welcome-file>
+    <!--<welcome-file>home/toMain.do</welcome-file>-->
+    <welcome-file>login.jsp</welcome-file>
   </welcome-file-list>
 
   <!--1.spring监听器: 读取applicationContext.xml配置文件-->

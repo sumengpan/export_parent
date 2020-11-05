@@ -24,7 +24,7 @@
                 <iframe id="iframe" name="iframe"
                         scrolling="auto"
                 frameborder="no" height="100%" width="100%"
-                src="home.do"></iframe>
+                src="${path}/welcome.jsp"></iframe>
     </div>
     <!-- 内容区域 /-->
 
