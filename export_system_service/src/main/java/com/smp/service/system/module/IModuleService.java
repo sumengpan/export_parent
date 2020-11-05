@@ -2,6 +2,7 @@ package com.smp.service.system.module;
 
 import com.github.pagehelper.PageInfo;
 import com.smp.domain.system.module.Module;
+import com.smp.domain.system.user.User;
 
 import java.util.List;
 
@@ -18,4 +19,11 @@ public interface IModuleService {
     boolean deleteModule(String moduleId);
 
     List<Module> findAllModules();
+
+    List<Module> findModuleByRoleId(String roleId);
+
+    void updateRoleModule(String roleId, String moduleIds);
+
+    List<Module> findModuleByUser(User user);
+
 }

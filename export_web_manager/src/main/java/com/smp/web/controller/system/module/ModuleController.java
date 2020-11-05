@@ -72,8 +72,7 @@ public class ModuleController extends BaseController {
     @RequestMapping(path = "/update",method = {RequestMethod.GET,RequestMethod.POST})
     public  String update(Module module){
         l.info("update module="+module);
-
-
+        //更新
         imoduleService.updateModule(module);
         return "redirect:/system/module/toList.do";
     }

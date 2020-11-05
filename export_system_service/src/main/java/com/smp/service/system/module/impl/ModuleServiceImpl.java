@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.smp.dao.system.module.IModuleDao;
 import com.smp.domain.system.module.Module;
+import com.smp.domain.system.user.User;
 import com.smp.service.system.module.IModuleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -63,5 +64,39 @@ public class ModuleServiceImpl implements IModuleService {
     @Override
     public List<Module> findAllModules() {
         return iModuleDao.findAll();
+    }
+
+    @Override
+    public List<Module> findModuleByRoleId(String roleId) {
+        return iModuleDao.findByRoleId(roleId);
+    }
+
+    @Override
+    public void updateRoleModule(String roleId, String moduleIds) {
+        //先做删除 指定角色在中间表中的记录
+        iModuleDao.deleteRoleModule(roleId);
+        //moduleIds 202,203
+        String[] mids = moduleIds.split(",");
+        if (mids.length > 0) { //判断，再操作
+            //再作添加
+            for (String mid : mids) {
+                iModuleDao.saveRoleModule(roleId, mid);
+            }
+        }
+    }
+
+    @Override
+    public List<Module> findModuleByUser(User user) {
+        //degree ==0 平台管理员 只能看 Sass菜单
+        //degree ==1 企业管理员 只能看 Sass菜单以外
+        //degree ==其他 用户员 根据RBAC表查询
+        //给一个用户数据到service，service自己判断
+        if (user.getDegree() == 0) {//平台管理员
+            return iModuleDao.findByBelong("0");
+        } else if (user.getDegree() == 1) {//企业管理员
+            return iModuleDao.findByBelong("1");
+        } else {
+            return iModuleDao.findByUserId(user.getUserId());
+        }
     }
 }

@@ -110,4 +110,39 @@
     <select id="findParentIdCount" parameterType="string" resultType="int">
         select count(*) from ss_module where parent_id=#{moduleId}
     </select>
+
+    <!--List<Module> findRoleId(String roleId);-->
+    <select id="findByRoleId" parameterType="string" resultMap="moduleMap">
+        select m.*
+        from pe_role_module rm
+        inner join ss_module m
+        on rm.module_id=m.module_id
+        where rm.role_id=#{roleId}
+    </select>
+
+    <!--void deleteRoleMoudle(String roleId);-->
+    <delete id="deleteRoleModule" parameterType="string">
+        delete from pe_role_module where role_id=#{roleId}
+    </delete>
+
+    <!--void saveRoleMoudle(String roleId,String mid);-->
+    <insert id="saveRoleModule">
+        insert into pe_role_module values (#{arg0},#{arg1});
+    </insert>
+
+    <!--List<Module> findByBelong(String belong);//0：平台管理；1：企业管理-->
+    <select id="findByBelong" parameterType="string" resultMap="moduleMap">
+        select *from ss_module where belong=#{belong};
+    </select>
+
+    <!--List<Module> findByUserId(String userId);//使用RBAC-->
+    <select id="findByUserId" parameterType="string" resultMap="moduleMap">
+        select distinct  m.*
+            from
+            pe_role_user ru
+            inner join pe_role_module rm on ru.role_id=rm.role_id
+            inner join ss_module m       on m.module_id=rm.module_id
+            where ru.user_id=#{userId}
+            order by module_id asc;
+    </select>
 </mapper>
