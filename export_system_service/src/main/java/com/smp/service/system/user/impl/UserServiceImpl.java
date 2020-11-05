@@ -42,6 +42,11 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
+    public User findUserByEmail(String email) {
+        return iUserDao.findByEmail(email);
+    }
+
+    @Override
     public void saveUser(User user) {
         String uuid= UUID.randomUUID().toString();
         user.setUserId(uuid);

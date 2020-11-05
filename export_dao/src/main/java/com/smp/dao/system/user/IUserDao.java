@@ -14,4 +14,5 @@ public interface IUserDao {
     void update(User user);
 
     void deleteById(String userId);
+    User findByEmail(String email);
 }

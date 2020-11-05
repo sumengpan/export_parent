@@ -18,4 +18,6 @@ public interface IUserService {
     boolean deleteUser(String userId);
 
     List<User> findAllUsers(String companyId);
+
+    User findUserByEmail(String email);
 }

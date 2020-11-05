@@ -18,7 +18,7 @@
 </head>
 <script>
     function formSubmit() {
-        document.icform.action="/system/user/changeRole.do";
+        document.icform.action="${path}/system/user/updateUserRole.do";
         document.icform.submit();
     }
 </script>
@@ -40,19 +40,24 @@
         <!-- .box-body -->
         <div class="box box-primary">
             <div class="box-header with-border">
-                <h3 class="box-title">用户 [${user.userName}] 角色列表</h3>
+                <h3 class="box-title">用户 [${user.userName}] 的角色列表</h3>
             </div>
+
             <div class="box-body">
                 <form name="icform" method="post" >
-                    <input type="hidden" name="userid" value="${user.id}"/>
-                    <input type="hidden" name="oldRoleIds" value="${userRoleStr}"/>
+                    <input type="hidden" name="userId" value="${user.userId}"/>
+
                     <div class="textbox" id="centerTextbox">
                         <div style="text-align:left">
-                            <c:set var="oldRoleIds" value=""/>
+
                             <c:forEach items="${roleList}" var="role" varStatus="vs">
                                      <span style="padding:3px;margin-right:30px;width: 160px;display: inline-block">
-                                         <input type="checkbox" name="roleIds" value="${role.id}"
-                                                <c:if test="${fn:contains(userRoleStr,role.id)}">checked</c:if>
+                                         <input type="checkbox" name="roleIds" value="${role.roleId}"
+                                             <%--                                               根据role对象中的checked属性进行判断，如果为true，则打勾，否不打勾--%>
+                                                 <c:if test="${role.checked}">
+                                                     checked
+                                                 </c:if>
+
                                          />
                                          ${role.name}
                                      </span>

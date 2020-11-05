@@ -73,4 +73,27 @@ public class TestUserService {
         List<User> list = iUserService.findAllUsers(companyId);
         l.info("pi = "+list);
     }
+    @Test
+    public void test06(){
+        //根据 email查询对应的用户
+                String email = "lw@export.com";
+                String password="123";
+                User user = iUserService.findUserByEmail(email);
+                l.info("test06 user "+user);
+                if (user != null) {
+                    //1:找到
+                    //比较账号密码
+                    if(user.getPassword().equals(password)){
+                        //正确
+                        l.info("正确");
+                    }else{
+                        //密码不对
+                        l.info("密码不对");
+                    }
+                }else{
+                    //2:没找到
+                    //用户不存在
+                    l.info("用户不存在");
+                }
+            }
 }

@@ -7,11 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>数据 - AdminLTE2定制版 | Log in</title>
     <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
-    <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../plugins/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../plugins/ionicons/css/ionicons.min.css">
-    <link rel="stylesheet" href="../plugins/adminLTE/css/AdminLTE.css">
-    <link rel="stylesheet" href="../plugins/iCheck/square/blue.css">
+    <% pageContext.setAttribute("path",request.getContextPath());%>
+    <link rel="stylesheet" href="${path}/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${path}/plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="${path}/plugins/ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="${path}/plugins/adminLTE/css/AdminLTE.css">
+    <link rel="stylesheet" href="${path}/plugins/iCheck/square/blue.css">
 </head>
 
 <script>
@@ -30,8 +31,10 @@
     <!-- /.login-logo -->
     <div class="login-box-body">
         <p class="login-box-msg">登录系统</p>
-        <form action="/login.do" method="post">
+        <!-- 1 修改表单 提交的地址-->
+        <form action="${path}/system/user/login.do" method="post">
             <div class="form-group has-feedback">
+                <!-- 2 参数名称 email password -->
                 <input type="email" name="email" class="form-control" placeholder="Email">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
             </div>
@@ -42,24 +45,26 @@
             <div class="row">
                 <div class="col-xs-8">
                     <div class="checkbox icheck">
-                        <label class="">${error}</label>
+                        <!-- 4 显示来自request的信息-->
+                        <div class="" style="color: #ff0000">${error}</div>
                     </div>
                 </div>
                 <div class="col-xs-4">
+                    <!-- 3 点击提交 -->
                     <button type="submit" class="btn btn-primary btn-block btn-flat">登录</button>
                 </div>
             </div>
         </form>
         <div class="social-auth-links text-center">
             <p>- 或者 -</p>
-            <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-qq"></i> 腾讯QQ用户登录</a>
+            <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-qq"></i> QQ用户登录</a>
             <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-weixin"></i> 微信用户登录</a>
         </div>
     </div>
 </div>
-<script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
-<script src="../plugins/bootstrap/js/bootstrap.min.js"></script>
-<script src="../plugins/iCheck/icheck.min.js"></script>
+<script src="${path}/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script src="${path}/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="${path}/plugins/iCheck/icheck.min.js"></script>
 <script>
     $(function() {
         $('input').iCheck({
