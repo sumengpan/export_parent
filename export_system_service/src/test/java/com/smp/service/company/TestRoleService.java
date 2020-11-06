@@ -43,7 +43,7 @@ public class TestRoleService {
     @Test
     public void test03(){
     //更新业务，先根据id查找对应记录，编辑值，在保存到数据库
-        String roleId ="";
+        String roleId ="a7aea786-556f-4da5-81d3-b89e9c25dd26";
         Role role=iRoleService.findById(roleId);
         l.info("role="+role);
         //修改

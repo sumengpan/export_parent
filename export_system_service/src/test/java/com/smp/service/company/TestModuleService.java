@@ -43,7 +43,7 @@ public class TestModuleService {
     @Test
     public void test03(){
     //更新业务，先根据id查找对应记录，编辑值，在保存到数据库
-        String moduleId ="ad3be6e7-551f-45b6-b816-b2b751e204ed";
+        String moduleId ="62c977ed-9ebd-41f4-b963-055873947f4b";
         Module module=iModuleService.findModuleById(moduleId);
         l.info("module="+module);
         //修改

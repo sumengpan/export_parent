@@ -20,18 +20,20 @@ public class TestUserService {
 
     @Autowired
     IUserService iUserService;
+
     //增*删改查*
     @Test
-    public void test01(){
+    public void test01() {
         //分页列表
         //页面上显示分页列表，就要求业务方法中提供查询PageInfo的方法
-        String companyId="1";
+        String companyId = "1";
         //作为一个公司用户的管理员，只能查自己公司的员工。
-        PageInfo<User> pi= iUserService.findByPage(1,3,companyId);
-        l.info("pi = "+pi);
+        PageInfo<User> pi = iUserService.findByPage(1, 3, companyId);
+        l.info("pi = " + pi);
     }
+
     @Test
-    public void test02(){
+    public void test02() {
         //
         //将一个表单数据保存在javaBean中，再将javaBean存到数据库
         User user = new User();
@@ -42,58 +44,60 @@ public class TestUserService {
     }
 
     @Test
-    public void test03(){
+    public void test03() {
         //
         //更新业务  先根据id查找出对应的一条记录，编辑它的值，再将记录保存到数据库中
 
-        String userId="b74fbc6b-9516-41ee-a592-2a2867dd1082";
-        User user =  iUserService.findUserById(userId);
-        l.info("user="+user);
+        String userId = "b891b14b-1316-4a79-8b88-695be1e3f42f";
+        User user = iUserService.findUserById(userId);
+        l.info("user=" + user);
         //修改
         user.setUserName("user jack");
         //保存
         iUserService.updateUser(user);
 
     }
+
     @Test
-    public void test04(){
+    public void test04() {
         //
         //删除业务，就是根据指定的id，删除数据库中的记录
-        String userId="11111";
+        String userId = "11111";
         //删除
         boolean flag = iUserService.deleteUser(userId);
-        l.info(flag+"");
+        l.info(flag + "");
 
     }
 
     @Test
-    public void test05(){
+    public void test05() {
         //A公司管理员，只能查A公司用户或者员工
-        String companyId="1";
+        String companyId = "1";
         List<User> list = iUserService.findAllUsers(companyId);
-        l.info("pi = "+list);
+        l.info("pi = " + list);
     }
+
     @Test
-    public void test06(){
+    public void test06() {
         //根据 email查询对应的用户
-                String email = "lw@export.com";
-                String password="123";
-                User user = iUserService.findUserByEmail(email);
-                l.info("test06 user "+user);
-                if (user != null) {
-                    //1:找到
-                    //比较账号密码
-                    if(user.getPassword().equals(password)){
-                        //正确
-                        l.info("正确");
-                    }else{
-                        //密码不对
-                        l.info("密码不对");
-                    }
-                }else{
-                    //2:没找到
-                    //用户不存在
-                    l.info("用户不存在");
-                }
+        String email = "lw@export.com";
+        String password = "123";
+        User user = iUserService.findUserByEmail(email);
+        l.info("test06 user " + user);
+        if (user != null) {
+            //1:找到
+            //比较账号密码
+            if (user.getPassword().equals(password)) {
+                //正确
+                l.info("正确");
+            } else {
+                //密码不对
+                l.info("密码不对");
             }
+        } else {
+            //2:没找到
+            //用户不存在
+            l.info("用户不存在");
+        }
+    }
 }

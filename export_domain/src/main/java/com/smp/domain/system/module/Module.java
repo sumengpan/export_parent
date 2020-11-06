@@ -3,7 +3,7 @@ package com.smp.domain.system.module;
 public class Module {
     private String moduleId   ;
     private String parentId   ;
-    private String parentName ;
+    private String parentName;
     private String name        ;
     private long layerNum   ;
     private long isLeaf     ;
