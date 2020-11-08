@@ -95,14 +95,17 @@ public class RoleController extends BaseController {
         //当前授权页面需要显示 角色名称
         l.info("toRoleModule roleId="+roleId);
         Role role=iRoleService.findById(roleId);
+
         //数据转发到页面
         request.setAttribute("role",role);
         return "system/role/role-module";
     }
-    //$.get('${path}/role/getZtreeData.do?roleId=${role.roleId}',fn,'json')
 
+
+    //$.get('${path}/role/getZtreeData.do?roleId=${role.roleId}',fn,'json')
     @RequestMapping(path="/getZtreeData",method ={ RequestMethod.GET, RequestMethod.POST})
-    public @ResponseBody Object getZtreeData(String roleId) {//接收页面提交的roleId
+    public @ResponseBody
+    Object getZtreeData(String roleId) {//接收页面提交的roleId
         //所有的权限查询出来
         List<Module> all = iModuleService.findAllModules();
         //转换成 List<Map<String,Object>>  { id:1, pId:0, name:"Sass管理", open:true},

@@ -40,6 +40,18 @@ public class UserController extends BaseController {
         request.setAttribute("pi",pi);
         return "system/user/user-list";
     }
+    //删除
+    @RequestMapping(path="/delete",method ={ RequestMethod.GET, RequestMethod.POST})
+    public @ResponseBody
+    Object delete(String userId){
+        //参数接收页面js提交过来的userId
+        boolean flag=iUserService.deleteUser(userId);
+        if(flag){
+            return Result.init(200,"删除成功",null);
+        }else {
+            return Result.init(-200,"删除失败",null);
+        }
+    }
     @RequestMapping(path="/toAdd",method ={ RequestMethod.GET, RequestMethod.POST})
     public String toAdd(){
         //页面上有一个下拉菜单，需要查询所有的部门
@@ -86,18 +98,7 @@ public class UserController extends BaseController {
         return "redirect:/system/user/toList.do";
     }
 
-    //删除
-    @RequestMapping(path="/delete",method ={ RequestMethod.GET, RequestMethod.POST})
-    public @ResponseBody
-    Object delete(String userId){
-        //参数接收页面js提交过来的userId
-        boolean flag=iUserService.deleteUser(userId);
-        if(flag){
-            return Result.init(200,"删除成功",null);
-        }else {
-            return Result.init(-200,"删除失败",null);
-        }
-    }
+
     @Autowired
     IRoleService iRoleService;
     @RequestMapping(path = "/toUserRole", method = {RequestMethod.GET, RequestMethod.POST})

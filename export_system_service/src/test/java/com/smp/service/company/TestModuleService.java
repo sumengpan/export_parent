@@ -84,7 +84,8 @@ public class TestModuleService {
     public void test08(){
         User user=new User();
         user.setUserId("0f1f71fe-fe7c-4a44-a952-4f08bf5aa990");
-        user.setDegree(1);//企业管理员
+        //user.setDegree(0);
+        //user.setDegree(1);//企业管理员
         user.setDegree(4);//普通用户
         List<Module> menus=iModuleService.findModuleByUser(user);
         l.info("test08 menus="+menus);

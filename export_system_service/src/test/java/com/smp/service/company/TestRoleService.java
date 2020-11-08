@@ -73,8 +73,8 @@ public class TestRoleService {
     @Test
     public void test06(){
         //老王的角色列表
-        String userId="";
-        String[] roleIds={""};
+        String userId="002108e2-9a10-4510-9683-8d8fd1d374ef";
+        String[] roleIds={"4028a1cd4ee2d9d6014ee2df4c6a0007"};
         iRoleService.updateUserRole(userId,roleIds);
     }
 }

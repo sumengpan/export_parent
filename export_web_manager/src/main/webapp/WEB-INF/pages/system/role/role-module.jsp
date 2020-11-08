@@ -16,8 +16,8 @@
     <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
     <!-- 页面meta /-->
     <%-- 第一步：拷贝如下引入的css/js文件到项目的ztree-test.html页面
-      第二步：拷贝js导入到当前页面
-      第三步：页面定义显示树的区域--%>
+       第二步：拷贝js导入到当前页面
+       第三步：页面定义显示树的区域--%>
     <link rel="stylesheet" type="text/css" href="${path}/plugins/ztree/css/zTreeStyle/zTreeStyle.css">
     <script type="text/javascript" src="${path}/plugins/ztree/js/jquery-1.4.4.min.js"></script>
     <script type="text/javascript" src="${path}/plugins/ztree/js/jquery.ztree.all-3.5.min.js"></script>

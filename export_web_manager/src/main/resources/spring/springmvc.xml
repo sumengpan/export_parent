@@ -3,7 +3,15 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <!--1.扫描Controller所在包-->
     <context:component-scan base-package="com.smp.web"/>
@@ -19,7 +27,21 @@
 
     <!--3.mvc注解驱动-->
     <!--3. 把转换器工厂放入到注解驱动，才会生效的 @RequestMapping @ResponseBody @RequestBody-->
-    <mvc:annotation-driven />
+    <mvc:annotation-driven  conversion-service="conversionServiceFactory"/>
+    <bean id="stringToDateConverter" class="com.smp.web.converter.StringToDateConverter"/>
 
+    <!--2.把转换器对象放入SpringMVC转换器工厂中-->
+    <bean id="conversionServiceFactory" class="org.springframework.context.support.ConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <ref bean="stringToDateConverter"/>
+            </set>
+        </property>
+    </bean>
+
+    <!--2 注册 -->
+    <bean id="myExceptionResolver" class="com.smp.web.exceptions.MyExceptionResolver"/>
+
+    <!--开启AOP切面注解: 整个项目扫描有没有@Aspect注解-->
+    <aop:aspectj-autoproxy/>
 </beans>
-

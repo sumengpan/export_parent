@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" pageEncoding="utf-8" language="java" %>
+<%@  page isELIgnored="false" contentType="text/html;charset=UTF-8" pageEncoding="utf-8" language="java" %>
 <%@ include file="../base.jsp"%>
 <!DOCTYPE html>
 <html>
@@ -20,9 +20,10 @@
     <jsp:include page="left_menu.jsp"></jsp:include>
     <!-- 导航侧栏 /-->
     <!-- 内容区域 -->
-            <div class="content-wrapper">
-                <iframe id="iframe" name="iframe"
-                        scrolling="auto"
+    <div class="content-wrapper">
+        <iframe id="iframe" name="iframe"
+                style="overflow:visible;"
+                scrolling="auto"
                 frameborder="no" height="100%" width="100%"
                 src="${path}/welcome.jsp"></iframe>
     </div>
@@ -30,7 +31,6 @@
 
     <!-- 底部导航 -->
     <jsp:include page="footer.jsp"></jsp:include>
-                style="overflow:visible;"
     <!-- 底部导航 /-->
 </div>
 

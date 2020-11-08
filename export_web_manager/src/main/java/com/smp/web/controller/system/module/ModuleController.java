@@ -68,7 +68,7 @@ public class ModuleController extends BaseController {
         request.setAttribute("modules",modules);
         return "system/module/module-update";
     }
-
+    //修改
     @RequestMapping(path = "/update",method = {RequestMethod.GET,RequestMethod.POST})
     public  String update(Module module){
         l.info("update module="+module);
@@ -76,9 +76,10 @@ public class ModuleController extends BaseController {
         imoduleService.updateModule(module);
         return "redirect:/system/module/toList.do";
     }
+    //删除
     @RequestMapping(path = "/delete",method = {RequestMethod.GET,RequestMethod.POST})
     public  @ResponseBody
-    Object delete(String moduleId){
+    Object delete(String moduleId){//接收页面js提交过来的moduleId
         boolean flag=imoduleService.deleteModule(moduleId);
         if(flag){
             return Result.init(200,"删除成功",null);
