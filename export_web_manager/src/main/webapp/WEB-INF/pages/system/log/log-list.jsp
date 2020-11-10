@@ -45,7 +45,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach items="${page.rows}" var="log"  varStatus="st">
+                    <c:forEach items="${pi.list}" var="log"  varStatus="st">
                         <tr>
                             <td>${st.count }</td>
                             <td>${log.userName }</td>
@@ -59,7 +59,7 @@
         </div>
         <div class="box-footer">
             <jsp:include page="../../common/page.jsp">
-                <jsp:param value="${ctx}/system/log/list.do" name="pageUrl"/>
+                <jsp:param value="${path}/system/syslog/toList.do" name="pageUrl"/>
             </jsp:include>
         </div>
     </div>
