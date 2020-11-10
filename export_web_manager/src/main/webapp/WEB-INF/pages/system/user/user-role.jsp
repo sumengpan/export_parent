@@ -17,6 +17,7 @@
     <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
 </head>
 <script>
+    //表单提交
     function formSubmit() {
         document.icform.action="${path}/system/user/updateUserRole.do";
         document.icform.submit();

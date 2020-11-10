@@ -21,7 +21,8 @@ public class SysLogController extends BaseController {
     ISysLogService iSysLogService;
 
     @RequestMapping(path = "/toList",method = {RequestMethod.GET,RequestMethod.POST})
-    public String toList(@RequestParam(defaultValue = "1") int curr, @RequestParam(defaultValue = "5") int pageSize){
+    public String toList(@RequestParam(defaultValue = "1") int curr,
+                         @RequestParam(defaultValue = "15") int pageSize){
         //调查分页列表的方法
         PageInfo<SysLog> pi=iSysLogService.findByPage(curr,pageSize,getLoginCompanyId());
         //将pi添加到页面
