@@ -1,5 +1,6 @@
 package com.smp.web.controller.company;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.github.pagehelper.PageInfo;
 import com.smp.domain.company.Company;
 import com.smp.service.company.ICompanyService;
@@ -18,9 +19,34 @@ import java.util.List;
 @RequestMapping("/company")
 public class CompanyController {
     private static final Logger l= LoggerFactory.getLogger(CompanyController.class);
-    @Autowired
+    //@Autowired 没有rpc功能
+    //就使用有rpc功能的Reference
+    @Reference
     ICompanyService iCompanyService;
 
+    //list.action->list------>查询
+    //访问company/list.do
+    @RequestMapping(path = "/toList",method = RequestMethod.GET)
+    public String toList(Integer curr,Integer pageSize,Model model){
+        //调service数据
+        if(curr==null){
+            //如果当前页面为空，则设置为1
+            curr=1;
+        }
+        if(pageSize==null){
+            //每页数为空，则设置为10
+            pageSize=10;
+        }
+        PageInfo<Company> pi=iCompanyService.findPage(curr,pageSize);
+
+        List<Company> list=iCompanyService.findAll();
+        l.info("list list="+list);
+        model.addAttribute("list",list);
+
+        l.info("toList pi="+pi);
+        model.addAttribute("pi",pi);
+        return "company/company-list";
+    }
     //修改传值
     @RequestMapping(path = "/update",method = RequestMethod.POST)
     public String update(Company company){
@@ -61,31 +87,6 @@ public class CompanyController {
         return "company/company-add";
     }
 
-
-    //list.action->list------>查询
-    //访问company/list.do
-    @RequestMapping(path = "/toList",method = RequestMethod.GET)
-    public String toList(Integer curr,Integer pageSize,Model model){
-        //调service数据
-        if(curr==null){
-            //如果当前页面为空，则设置为1
-            curr=1;
-        }
-        if(pageSize==null){
-            //每页数为空，则设置为10
-            pageSize=10;
-        }
-        PageInfo<Company> pi=iCompanyService.findPage(curr,pageSize);
-
-        List<Company> list=iCompanyService.findAll();
-        l.info("list list="+list);
-        model.addAttribute("list",list);
-
-        l.info("toList pi="+pi);
-        model.addAttribute("pi",pi);
-        return "company/company-list";
-    }
-
     //查询 1 打开列表页面
     @Deprecated
     @RequestMapping(path="/toList1",method = RequestMethod.GET)
@@ -97,10 +98,4 @@ public class CompanyController {
         //将数据发到页面，使用标签
         return "company/company-list";
     }
-    /*@RequestMapping(path = "/testDate.do",method = RequestMethod.GET)
-    public String testDate(Date date){
-        l.info("testDate date="+date);
-        int num=1/0;
-        return "result";
-    }*/
 }
