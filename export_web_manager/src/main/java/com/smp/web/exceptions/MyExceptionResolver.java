@@ -15,6 +15,7 @@ public class MyExceptionResolver implements HandlerExceptionResolver {
         ModelAndView mv = new ModelAndView();
         mv.addObject("exception",e.getMessage());//添加异常信息
         mv.setViewName("error");//指定一个显示错误的美观页面
+        e.printStackTrace();
         return mv;
     }
 }

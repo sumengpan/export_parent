@@ -261,7 +261,7 @@
                                 <%--非加密方式注销--%>
                                 <%--<a href="${path}/system/user/loginOut.do" class="btn btn-default btn-flat">注销</a>--%>
                                 <%--使用shiro--%>
-                                <a href="${path}/system/user/login-shiro" class="btn btn-default btn-flat">注销</a>
+                                <a href="${path}/system/user/loginOut-shiro" class="btn btn-default btn-flat">注销</a>
                             </div>
                         </li>
                     </ul>

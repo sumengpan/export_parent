@@ -26,6 +26,7 @@ public class CompanyController {
 
     //list.action->list------>查询
     //访问company/list.do
+    //@RequiresPermissions("企业管理")//当前用户需要【企业管理】权限
     @RequestMapping(path = "/toList",method = RequestMethod.GET)
     public String toList(Integer curr,Integer pageSize,Model model){
         //调service数据
@@ -37,6 +38,9 @@ public class CompanyController {
             //每页数为空，则设置为10
             pageSize=10;
         }
+        //添加权限判断
+//        Subject subject = SecurityUtils.getSubject();
+//        subject.checkPermission("企业管理");
         PageInfo<Company> pi=iCompanyService.findPage(curr,pageSize);
 
         List<Company> list=iCompanyService.findAll();

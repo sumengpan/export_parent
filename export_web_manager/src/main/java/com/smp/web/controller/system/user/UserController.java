@@ -248,7 +248,12 @@ public class UserController extends BaseController {
             request.setAttribute("error","邮箱或者密码不对");
             return "forward:/login-shiro.jsp";
         }
-
-
+    }
+    @RequestMapping(path = "/loginOut-shiro", method = {RequestMethod.GET, RequestMethod.POST})
+    public String loginOutShiro(){
+        //删除session中的用户信息
+        Subject subject = SecurityUtils.getSubject();
+        subject.logout();
+        return "redirect:/login-shiro.jsp";
     }
 }

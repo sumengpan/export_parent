@@ -37,18 +37,25 @@
     <!--配置一个密码的匹配器-->
     <!--  123 是用户提交过来的， 密码的匹配器 得到密文1，与数据库的密码2-->
     <!--创建凭证匹配器-->
-    <bean id="credentialsMatcher1"  class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+    <bean id="credentialsMatcher1" class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
         <!--指定加密算法-->
         <property name="hashAlgorithmName" value="md5"/>
     </bean>
     <!--使用自己定义的匹配器-->
-    <bean id="credentialsMatcher2"  class="com.smp.web.utils.CustomCredentialsMatcher">
+    <bean id="credentialsMatcher2" class="com.smp.web.utils.CustomCredentialsMatcher">
     </bean>
     <!--2.2.创建Realm-->
-    <bean id="authRealm" class="com.smp.web.shiro.AuthRealm"/>
     <bean id="authRealm" class="com.smp.web.shiro.AuthRealm">
         <property name="credentialsMatcher" ref="credentialsMatcher2"/>
     </bean>
 
+    <!-- @RequiredPermission-->
+    <bean id="lifecycleBeanPostProcessor"
+          class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+          depends-on="lifecycleBeanPostProcessor"/>
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
 </beans>
 
