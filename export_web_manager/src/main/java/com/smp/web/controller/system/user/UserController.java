@@ -11,6 +11,11 @@ import com.smp.service.system.module.IModuleService;
 import com.smp.service.system.role.IRoleService;
 import com.smp.service.system.user.IUserService;
 import com.smp.web.controller.BaseController;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -203,5 +208,47 @@ public class UserController extends BaseController {
         //让session过期
         session.invalidate();
         return "redirect:/login.jsp";//转发不会改地址的数据，只有重定向会
+    }
+    //${path}/system/user/login-shiro.do
+    @RequestMapping(path = "/login-shiro", method = {RequestMethod.GET, RequestMethod.POST})
+    public String loginShiro(String email,String password) {
+        //根据 email查询对应的用户
+        l.info("loginShiro email " + email);
+        l.info("loginShiro password " + password);
+        //使用shiro框架进行认证  结果也是三种可能  正确 没有异常，用户不存在 UnknownAccountException，密码出错 IncorrectCredentialsException
+        //本质是需要调用realm进行查找用户
+        Subject subject = SecurityUtils.getSubject();//获取连接
+        //1:先获取subject 表示对securitymanager连接
+        //2:调用 securitymanager
+        //3:再调用realm
+        //难验信息
+        UsernamePasswordToken token = new UsernamePasswordToken(email, password);//身份验证
+        try {
+            subject.login(token);//正确  --realm
+            //正确
+            l.info("正确");
+            //保存用户信息
+            //要求访问realm返回一个user对象
+            User user = (User) subject.getPrincipal();//  --realm
+            session.setAttribute("loginUser",user);
+            //一个 Module对象 就是左侧栏上的一个菜单项
+            List<Module> menus = iModuleService.findModuleByUser(user);
+            session.setAttribute("menus",menus);
+            l.info("login menus "+menus);
+            //跳到主页
+            return "redirect:/home/toMain.do";
+        } catch (UnknownAccountException e) {//用户不存在
+            e.printStackTrace();
+            l.info("用户不存在");
+            request.setAttribute("error","用户不存在");
+            return "forward:/login-shiro.jsp";
+        }catch (IncorrectCredentialsException e){//密码出错
+            e.printStackTrace();
+            l.info("密码不对");
+            request.setAttribute("error","邮箱或者密码不对");
+            return "forward:/login-shiro.jsp";
+        }
+
+
     }
 }

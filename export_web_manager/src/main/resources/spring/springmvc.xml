@@ -46,14 +46,14 @@
     <bean id="myExceptionResolver" class="com.smp.web.exceptions.MyExceptionResolver"/>
 
 
-    <!--2.dubbo消费方配置-->
-    <!--2.1 服务名称-->
+   <!-- &lt;!&ndash;2.dubbo消费方配置&ndash;&gt;
+    &lt;!&ndash;2.1 服务名称&ndash;&gt;
     <dubbo:application name="export_web_portal"></dubbo:application>
 
-    <!--2.2 Zookeeper连接配置-->
+    &lt;!&ndash;2.2 Zookeeper连接配置&ndash;&gt;
     <dubbo:registry address="zookeeper://localhost" port="2181"></dubbo:registry>
 
-    <!--2.3 扫描@Reference注解-->
-    <dubbo:annotation package="com.wzx.web"></dubbo:annotation>
+    &lt;!&ndash;2.3 扫描@Reference注解&ndash;&gt;
+    <dubbo:annotation package="com.wzx.web"></dubbo:annotation>-->
 
 </beans>

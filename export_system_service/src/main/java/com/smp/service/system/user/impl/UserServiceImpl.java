@@ -5,6 +5,9 @@ import com.github.pagehelper.PageInfo;
 import com.smp.dao.system.user.IUserDao;
 import com.smp.domain.system.user.User;
 import com.smp.service.system.user.IUserService;
+import org.apache.shiro.crypto.hash.Md5Hash;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +16,7 @@ import java.util.UUID;
 
 @Service
 public class UserServiceImpl implements IUserService {
+    private Logger l= LoggerFactory.getLogger(this.getClass());
     @Autowired
     IUserDao iUserDao;
     @Override
@@ -50,6 +54,12 @@ public class UserServiceImpl implements IUserService {
     public void saveUser(User user) {
         String uuid= UUID.randomUUID().toString();
         user.setUserId(uuid);
+        //原来保存用户使用的密码是明文，现在需要对它进行加密
+        if(user.getPassword()!=null){
+            Md5Hash md5Hash = new Md5Hash(user.getPassword(),user.getEmail());//参1 明文  参2 盐
+            user.setPassword(md5Hash.toString());
+        }
+        l.info("saveUser  "+user);
         iUserDao.save(user);
     }
     @Override
