@@ -30,30 +30,6 @@
 
     <!--3.mvc注解驱动-->
     <!--3. 把转换器工厂放入到注解驱动，才会生效的 @RequestMapping @ResponseBody @RequestBody-->
-    <mvc:annotation-driven  conversion-service="conversionServiceFactory"/>
-    <bean id="stringToDateConverter" class="com.smp.web.converter.StringToDateConverter"/>
-
-    <!--2.把转换器对象放入SpringMVC转换器工厂中-->
-    <bean id="conversionServiceFactory" class="org.springframework.context.support.ConversionServiceFactoryBean">
-        <property name="converters">
-            <set>
-                <ref bean="stringToDateConverter"/>
-            </set>
-        </property>
-    </bean>
-
-    <!--2 注册 -->
-    <bean id="myExceptionResolver" class="com.smp.web.exceptions.MyExceptionResolver"/>
-
-
-   <!-- &lt;!&ndash;2.dubbo消费方配置&ndash;&gt;
-    &lt;!&ndash;2.1 服务名称&ndash;&gt;
-    <dubbo:application name="export_web_portal"></dubbo:application>
-
-    &lt;!&ndash;2.2 Zookeeper连接配置&ndash;&gt;
-    <dubbo:registry address="zookeeper://localhost" port="2181"></dubbo:registry>
-
-    &lt;!&ndash;2.3 扫描@Reference注解&ndash;&gt;
-    <dubbo:annotation package="com.wzx.web"></dubbo:annotation>-->
+    <mvc:annotation-driven />
 
 </beans>

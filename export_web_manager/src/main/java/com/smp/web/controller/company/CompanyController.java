@@ -1,6 +1,5 @@
 package com.smp.web.controller.company;
 
-import com.alibaba.dubbo.config.annotation.Reference;
 import com.github.pagehelper.PageInfo;
 import com.smp.domain.company.Company;
 import com.smp.service.company.ICompanyService;
@@ -19,9 +18,7 @@ import java.util.List;
 @RequestMapping("/company")
 public class CompanyController {
     private static final Logger l= LoggerFactory.getLogger(CompanyController.class);
-    //@Autowired 没有rpc功能
-    //就使用有rpc功能的Reference
-    @Reference
+    @Autowired
     ICompanyService iCompanyService;
 
     //list.action->list------>查询
